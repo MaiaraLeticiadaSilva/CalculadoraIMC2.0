@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<header>
+    <h1>Calculadora de IMC</h1>
+</header>
+<body>
+    <form>
+        <div>
+            <label>Nome:</label>
+            <div>
+                <input type="text" name="nome" id="nome"/>
+            </div>
+        </div>
+        <div>
+            <label>Altura:</label>
+            <div>
+                <input type="number" name="altura" id="altura"/>
+            </div>
+        </div>
+        <div>
+            <label>Peso:</label>
+            <div>
+                <input type="number" name="peso" id="peso"/>
+            </div>
+        </div>
+        
+    </form>
+    <div>
+        <button>Calcular</button>
+    </div>
+</body>
+<script> 
+    let button=document.querySelector("button")
+    let form=document.querySelector("form")
+    let div=document.createElement("div")        
+    let body=document.querySelector("body")
+    let tabela=document.createElement("table")
+    let thead=document.createElement("thead")
+    let tbody=document.createElement("tbody")
+    let trhead=document.createElement("tr")
+    let th1=document.createElement("th")
+    th1.innerHTML="#"
+    let th2=document.createElement("th")
+    th2.innerHTML="Nome"
+    let th3=document.createElement("th")
+    th3.innerHTML="Altura"
+    let th4=document.createElement("th")
+    th4.innerHTML="Peso"
+    let th5=document.createElement("th")
+    th5.innerHTML="IMC"
+    trhead.append(th1)
+    trhead.append(th2)
+    trhead.append(th3)
+    trhead.append(th4)
+    trhead.append(th5)
+    thead.append(trhead)
+    tabela.append(thead)
+    tabela.append(tbody)
+    div.append(tabela)
+    body.append(div)
+    
+    let ids=0
+    button.onclick=function(){
+        let nome=document.querySelector("#nome").value
+        let altura=document.querySelector("#altura").value
+        let peso=document.querySelector("#peso").value
+        let IMC="";
+        let calculo=peso/(altura*altura)
+        calculo=calculo.toFixed(2)
+        
+
+        if (calculo<18.5){
+            IMC="Abaixo do Peso"
+        }
+        else if (calculo>=18.5&&calculo<=24.9){
+            IMC="Peso Normal"
+        }
+        else if (calculo>=25&&calculo<=29.9){
+            IMC="Sobrepeso"
+        }
+        else if (calculo>=30&&calculo<=34.9){
+            IMC="Obesidade Grau I"
+        }   
+        else if (calculo>=35&&calculo<=39.9){
+            IMC="Obesidade Grau II"
+        }
+        else if (calculo>=40){
+            IMC="Obesidade Grau III (Mórbida)"
+        }
+        
+        let tr=document.createElement("tr")
+        let tdID=document.createElement("td")
+        let txID=document.createTextNode(++ids)
+        tdID.append(txID)
+        tr.append(tdID)
+        let tdNome=document.createElement("td")
+        let txNome=document.createTextNode(nome)
+        tdNome.append(txNome)
+        tr.append(tdNome)
+        let tdAltura=document.createElement("td")
+        let txAltura=document.createTextNode(altura)
+        tdAltura.append(txAltura)
+        tr.append(tdAltura)
+        let tdPeso=document.createElement("td")
+        let txPeso=document.createTextNode(peso)
+        tdPeso.append(txPeso)
+        tr.append(tdPeso)
+        let tdIMC=document.createElement("td")
+        let txIMC=document.createTextNode(calculo+" - "+IMC)
+        tdIMC.append(txIMC)
+        tr.append(tdIMC)
+        
+        tbody.append(tr)
+        tabela.append(tbody)
+        document.querySelector("#nome").value = ""
+        document.querySelector("#altura").value = ""
+        document.querySelector("#peso").value = ""
+        return false
+    }
+    
+
+</script>
+</html>
